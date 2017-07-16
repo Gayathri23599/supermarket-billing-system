@@ -23,10 +23,7 @@ class Bill:
 					a=1
 					break
 			if a==1:
-				k=int(z)
-				q=k>=quantity
-				print(q)
-			        if k>=quantity:
+				if (z>=quantity)or(k>=quantity):
 					return True
 				else:
 					print("Item out of stock")
