@@ -13,7 +13,7 @@ class Bill:
 			else:
 				print("Item not found")
 				return False
-	def check_quantity(self,product):
+	def check_quantity(self,product,quantity):
 		with open('supermarket.csv') as csvfile:
 			reader=csv.DictReader(csvfile)
 			a=0
@@ -23,10 +23,16 @@ class Bill:
 					a=1
 					break
 			if a==1:
-			        if int(z)!=0:
-						return True
+				k=int(z)
+				q=k>=quantity
+				print(q)
+			        if k>=quantity:
+					return True
+				else:
+					print("Item out of stock")
+					print(int(z),"stocks available")
+					return False
 			else:
-				print("Item out of stock")
 				return False
 	def ret_price(self,product):
 		with open('supermarket.csv') as csvfile:
@@ -48,11 +54,15 @@ class Bill:
 		with open('supermarket.csv','w') as csvfile:
 			writer=csv.writer(csvfile)
 			writer.writerows(lines)
-	def buy(self,product):
+	def buy(self,product,quantity):
 		b=self.check_product(product)
 		if b==True:
-			a=self.check_quantity(product)
+			a=self.check_quantity(product,quantity)
 			if(a==True):
 				k=self.ret_price(product)
 				self.red_quantity(product)
 				return int(k)
+			else:
+				return 0
+		else:
+			return 0
