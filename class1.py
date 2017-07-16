@@ -54,10 +54,16 @@ class Product:
 	def delete(self,key):
 		with open('supermarket.csv') as inp:
 			reader=csv.reader(inp)
-			for row in reader:
-				if row[3]==key:
-					delete(row)	
+			a=0
+			lines=[l for l in reader]
+			for i in lines:
+				a=a+1
+				if i[3]==key:
+					del lines[a-1:a]
 					break
+		with open('supermarket.csv','w') as out:
+			writer=csv.writer(out)
+			writer.writerows(lines)
 			
 			
 	
